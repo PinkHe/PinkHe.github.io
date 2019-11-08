@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function fun(obj){
+		
+		obj.src="/WEB14/checkImgServlet?time="+new Date().getTime();
+	}
+</script>
+</head>
+<script type="text/javascript">
+	
+</script>
+<body>
+	验证码：<input type="text" name="checkImg"/><img src="/WEB14/checkImgServlet" onclick="fun(this)"/>
+
+</body>
+</html>
