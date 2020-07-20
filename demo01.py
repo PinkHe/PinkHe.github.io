@@ -1,9 +1,26 @@
+people = {}
+name = input("name:")
+age = input("age:")
+sex = input("sex:")
+
+#people.keys("name"=name)
+#people.keys("age"=age)
+#people.keys("sex"=sex)
+
+people.update(name=name)
+people.update(age=age)
+people.update(sex=sex)
+
+
+print(people)
+
+'''
 a = (1,2,3,4,'杨狗狗','杨猫猫','杨猪猪')
 
 print(a.index("杨狗狗"))
 print(a.count(1))
 
-
+'''
 
 
 '''
@@ -15,6 +32,8 @@ print(str1)
 print("输入的两段和为:",len(str1)+len(str2))
 
 '''
+
+
 
 
 
