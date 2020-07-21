@@ -1,3 +1,6 @@
+#哈哈哈
+
+
 people = {}
 name = input("name:")
 age = input("age:")
