@@ -1,21 +1,50 @@
+a , b = 0 , 1
+array = []
+while a < 1000 :
+    array.append(a)
+    a , b = b , a + b
+print(array)
+
+
+
+
+
 #哈哈哈
 
 
-people = {}
-name = input("name:")
-age = input("age:")
-sex = input("sex:")
+# people = {}
+# name = input("name:")
+# age = input("age:")
+# sex = input("sex:")
 
-#people.keys("name"=name)
-#people.keys("age"=age)
-#people.keys("sex"=sex)
+# #people.keys("name"=name)
+# #people.keys("age"=age)
+# #people.keys("sex"=sex)
 
-people.update(name=name)
-people.update(age=age)
-people.update(sex=sex)
+# people.update(name=name)
+# people.update(age=age)
+# people.update(sex=sex)
+
+# people
+
+# print(people)
 
 
-print(people)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 '''
 a = (1,2,3,4,'杨狗狗','杨猫猫','杨猪猪')
