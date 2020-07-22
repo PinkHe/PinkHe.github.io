@@ -1,9 +1,25 @@
-a , b = 0 , 1
-array = []
-while a < 1000 :
-    array.append(a)
-    a , b = b , a + b
-print(array)
+words = ['ddd','cccc','bbb','aaa']
+i=0;
+for w in words[:]:
+    ++i
+    print(i,w)
+    if len(w)>3 :
+        words.insert(0,w)
+        
+
+print(words)
+
+
+
+
+
+
+# a , b = 0 , 1
+# array = []
+# while a < 1000 :
+#     array.append(a)
+#     a , b = b , a + b
+# print(array)
 
 
 
