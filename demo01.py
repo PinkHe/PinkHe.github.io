@@ -1,6 +1,33 @@
+def fib(n):
+    num = []
+    a , b =0 , 1
+    while a < n:
+        num.append(a)
+        a, b = b, a+b
+    return num
 
+print(fib(100))
 
+'''
+num = 0
+for i in range(1,100,2):
+    if i == 1 or i == 3 or i == 5:
+        if i==1:
+            continue
+        else:
+            num.append(i)
+    else:
+        if i%3 != 0 :
+            if i%5 != 0 :
+                num.append(i)
+            else:
+                continue
+        else:
+            continue
+num.insert(0,2)
+print(num)
 
+'''
 #pass 语句什么也不做。当语法上需要一个语句，但程序需要什么动作也不做时，可以使用它---通常用于创建最小的类
 #循环中的 else 子句则会在未发生 break 时执行,break跳出最近的一个循环(for、while)
 #continue 语句表示继续循环中的下一次迭代:
