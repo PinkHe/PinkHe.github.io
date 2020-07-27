@@ -1,3 +1,57 @@
+
+#lambda表达式：i:i+2 注：i即为函数入口参数，i+2即为函数体；lambda表达式的意义为简化简单函数的定义
+'''
+def fun(x):
+    return lambda i:i+2
+
+f = fun(7)
+print(f(1))
+
+
+def f(a, L=None):
+    if L is None:
+        L = []
+    print(L)
+    L.append(a)
+    return L
+
+def f(a, L=[]):
+    L.append(a)
+    return L
+
+print(f(1))
+print(f(2))
+print(f(3))
+'''
+
+'''
+def ask_ok(prompt, retries=4, reminder='Please try again!'):
+    while True:
+        ok = input(prompt)
+        if ok in ('y', 'ye', 'yes'):
+            return True
+        if ok in ('n', 'no', 'nop', 'nope'):
+            return False
+        retries = retries - 1
+        if retries < 0:
+            raise ValueError('invalid user response')
+        print(reminder)
+
+ask_ok('')
+'''
+#函数打印乘法表
+#print(end="")即可不换行输出
+'''
+def fun():
+    for i in range(1,10):
+        for j in range(1,i+1):
+            print(j,"*",i,"=",i*j,end=" ")
+        print()
+
+fun()
+'''
+#函数
+'''
 def fib(n):
     num = []
     a , b =0 , 1
@@ -7,7 +61,7 @@ def fib(n):
     return num
 
 print(fib(100))
-
+'''
 '''
 num = 0
 for i in range(1,100,2):
