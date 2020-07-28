@@ -1,4 +1,75 @@
 
+
+
+
+#列表推导式
+#[表达式 for语句 (零个或多个if或者for语句)]
+#列表推导式中的初始表达式可以是任何表达式，包括另一个列表推导式。
+[x*2 for x in range(6)]
+print([x*2 for x in range(6) if x%2==0])
+'''
+#collections中的deque可以很好的实现队列
+from collections import deque
+
+list01 = deque([1,2,3])
+
+list01.appendleft(4)
+list01.appendleft(5)
+
+print(list01)
+
+temp = list01.popleft()
+print(temp)
+
+print(list01)
+
+#队列：先进先出(如下方法：效率很差，不推荐，推荐如上)
+list01 = [1,2,3]
+list01.insert(0,4)
+list01.insert(0,5)
+print(list01)
+
+temp = list01.pop(0)
+print(temp)
+
+print(list01)
+
+
+#堆栈：先进后出
+stack = [1,2,3,4]
+
+
+stack.append(6)
+print(stack)
+stack.append(7)
+print(stack)
+temp = stack.pop()
+print(temp)
+print(stack)
+'''
+'''
+()  元组
+[]  列表
+{}  字典
+
+
+list01 = ["111","123","333"]
+
+list02 = ["444","555","666"]
+
+list02.append("777")
+#list02.extend(list01)
+list02[len(list02):] = list01
+print(list02)
+
+#后两个可选参数是切片参数，表示在列表中的那个切片中寻找
+index = list02.index("333",0,len(list02))
+print(index)
+#list02.sort()
+#翻转列表中的元素
+list02.reverse()
+print(list02)
+'''
 #lambda表达式：i:i+2 注：i即为函数入口参数，i+2即为函数体；lambda表达式的意义为简化简单函数的定义
 '''
 def fun(x):
