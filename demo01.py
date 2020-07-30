@@ -2,12 +2,52 @@
 
 
 
+
+
+
+'''
+#相关常用方法
+当在字典中循环时，用 items() 方法可将关键字和对应的值同时取出
+当在序列中循环时，用 enumerate() 函数可以将索引位置和其对应的值同时取出、
+当同时在两个或更多序列中循环时，可以用 zip() 函数将其内元素一一匹配
+如果要逆向循环一个序列，可以先正向定位序列，然后调用 reversed() 函数
+如果要按某个指定顺序循环一个序列，可以用 sorted() 函数，它可以在不改动原序列的基础上返回一个新的排好序的序列
+如果要按某个指定顺序循环一个序列，可以用 sorted() 函数，它可以在不改动原序列的基础上返回一个新的排好序的序列
+knights = {'gallahad': 'the pure', 'robin': 'the brave'}
+for k, v in knights.items():
+    print(k, v)
+
+#dict()字典的构造函数
+dict(a=22,b=44,c=66)
+{x: x**2 for x in (2, 4, 6)}
+dict([('sape', 4139), ('guido', 4127), ('jack', 4098)])
+
+student = {'name':'tom', 'age':12,'sex':'man'}
+
+list01 = list(student)
+
+print(student,"=========",list01)
+print(student['name'])
+print("=======================")
+student['name'] = 'Marry'
+
+print("=======================")
+student['work'] = 'student'
+print(student,"=========",list01)
+print(student['name'])
+
+#in/not in 检查字典中是否存在一个特定的键，返回布尔类型
+print('man' in student)
+'''
+
+
 #列表推导式
 #[表达式 for语句 (零个或多个if或者for语句)]
 #列表推导式中的初始表达式可以是任何表达式，包括另一个列表推导式。
+'''
 [x*2 for x in range(6)]
 print([x*2 for x in range(6) if x%2==0])
-'''
+
 #collections中的deque可以很好的实现队列
 from collections import deque
 
