@@ -1,8 +1,9 @@
 
 
+#模块
+import ./../fibo
 
-
-
+fibo.fib(10)
 
 
 '''
