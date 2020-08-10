@@ -1,4 +1,8 @@
+print("hellow python")
 
+
+
+'''
 
 #模块
 import ./../fibo
@@ -6,7 +10,7 @@ import ./../fibo
 fibo.fib(10)
 
 
-'''
+
 #相关常用方法
 当在字典中循环时，用 items() 方法可将关键字和对应的值同时取出
 当在序列中循环时，用 enumerate() 函数可以将索引位置和其对应的值同时取出、
