@@ -19,11 +19,13 @@ Including another URLconf
 from django.urls import path
 from . import testhe
  
-
-
 urlpatterns = [
-    path('hello/', testhe.hello),
+    path('index/', testhe.index),
 ]
+
+# urlpatterns = [
+#     path('hello/', testhe.hello),
+# ]
 # urlpatterns = [
 #     url(r'^$', testhe.hello),
 # ]

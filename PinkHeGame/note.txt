@@ -1,0 +1,5 @@
+django 启动服务器
+python manage.py runserver 0.0.0.0:8000
+
+针对Django错误unsupported operand type(s) for +: ‘PosixPath‘ and ‘str‘的解决办法
+将settings中的'DIRS': [BASE_DIR+'templates',],改为'DIRS': [BASE_DIR,'templates',],
