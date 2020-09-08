@@ -1,5 +1,18 @@
-name = input()
-print(name)
+# 文件读写操作
+
+Demo_file = open("test.text","r")
+result_list = Demo_file.readlines()
+result_list01 = []
+for i in range(0,len(result_list)):
+   result_list01.append(result_list[i].rstrip('\n'))
+print(result_list01)
+
+Demo_file.close()
+
+
+
+s = 'hahahahh\n'
+print(s.rstrip("\n"))
 
 
 
