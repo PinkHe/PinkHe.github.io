@@ -6,6 +6,7 @@ import time
 import ast
 import FanyiUtil
 import json
+import unicodedata
 
 
 
@@ -20,6 +21,7 @@ baidu_q_list = FanyiUtil.file_read('file.text', 'UTF-8')
 result_list = []
 # 发送请求
 for i in baidu_q_list:
+  i = unicodedata.normalize('NFKC', i)#字符转换
   baidu_salt = FanyiUtil.baidu_random(10)
   temp_str = FanyiUtil.fanyi_request(i,userInfo['baidu_from'],userInfo['baidu_to'],userInfo['baidu_appid'],baidu_salt,userInfo['baidu_key'])
   temp_str = str(temp_str,'UTF-8')
@@ -35,8 +37,10 @@ for i in result_list:
 print("识别结果为：")
 for i in result_dict_list:
   if i["from"] not in language:
-    print("识别失败")
+    print("识别失败",end='###')
   else:
-    print(language[i["from"]])
+    print(language[i["from"]],end='___')
+  
+  print(i["trans_result"])
   
   
