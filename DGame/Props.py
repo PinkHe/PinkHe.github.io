@@ -25,8 +25,14 @@ select_all_sign_sql = "SELECT Props_sign from dgprops "
 cursor.execute(select_all_sign_sql)
 all_sign_list = cursor.fetchall()
 
+sign_set = set()
 for i in all_sign_list:
-    print(i) 
+    sign_set.add(i)
+
+for i in resource:
+    if i[-1] in sign_set:
+        resource.remove(i)
+print(sign_set)
 # print( all_sign_list)
 # insert_sql = "insert into DGProps(Props_id,Props_name,Props_simpleChinese,Props_traditionalChinese,Props_kr,\
 #     Props_en,Props_fr,Props_ge,Props_ru,Props_sp,Props_pt,Props_tr,Props_pl,Props_it,Props_sign) \
