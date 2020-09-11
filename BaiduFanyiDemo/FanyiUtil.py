@@ -1,6 +1,7 @@
 import random
 import requests
 import hashlib
+import xlrd
 
 
 
@@ -33,3 +34,16 @@ def fanyi_request(baidu_q,baidu_from,baidu_to,baidu_appid,baidu_salt,baidu_key):
 #   response =  requests.post(url)
   print("数据校验中...")
   return response.text.encode('utf8')
+
+def read_excel(path):
+   result_list = []
+   with xlrd.open_workbook(path, encoding_override="UTF-8") as excel:
+      table = excel.sheets()[0]
+      nrows = table.nrows
+      ncols = table.ncols
+      i, j = 0, 0
+      for i in range(0, nrows):
+         for j in range(0, ncols):
+            cell = table.row_values(i)[j] #得到数字列数据
+            result_list.append(cell)
+   return result_list

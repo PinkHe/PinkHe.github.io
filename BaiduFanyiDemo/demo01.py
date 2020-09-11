@@ -16,7 +16,8 @@ with open('languageJson.json', 'r', encoding='UTF-8') as languageJson:
 with open('userInfo.json', 'r', encoding='UTF-8') as userInfoJson:
   userInfo = json.load(userInfoJson)
 
-baidu_q_list = FanyiUtil.file_read('file.text', 'UTF-8')
+# baidu_q_list = FanyiUtil.file_read('file.text', 'UTF-8')
+  baidu_q_list = FanyiUtil.read_excel("test.xls")
 
 result_list = []
 # 发送请求
@@ -37,7 +38,7 @@ for i in result_list:
 print("识别结果为：")
 for i in result_dict_list:
   if i["from"] not in language:
-    print("识别失败",end='###')
+    print("识别失败",end='___')
   else:
     print(language[i["from"]],end='___')
   
