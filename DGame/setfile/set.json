@@ -2,5 +2,5 @@
     "host":"localhost",
     "username":"root",
     "password":"123456",
-    "db_name":"pythonproject"
+    "db_name":"pythontest"
 }

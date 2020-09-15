@@ -1,5 +1,27 @@
 import hashlib
 
+
+# def dg_hash_key(test_map, num):
+#      result_map = []
+#      for i in test_map[:]:
+#           temp_hash = ''
+#           for j in i[2:]:
+#                i = unicodedata.normalize('NFKC', j)
+#                temp_hash += j[:num]
+#                temp_hash += j[-num:]
+
+#           print("凭借未" + temp_hash)
+#           temp_hash = hashlib.sha1(temp_hash.encode()).hexdigest()
+#           print("凭借未哈哈哈" + temp_hash)
+#           i = list(i)
+#           i.append(temp_hash)
+#           result_map.append(i)
+          
+#      return result_map
+
+
+
+'''
 test_map = [
      ("19","29","h5ahhah4kk","j5kkjkjsx4sjjak","j5shjah4sas"),
      ("18","28","h5ahhah3kk","j5kkjkjsx3sjjak","j5shjah 3sas"),
@@ -32,27 +54,29 @@ props_list = [
      ("1f","2f","ff","jj","kk")
 ]
 
-def dg_hash_key(test_map):
+def dg_hash_key(test_map, num):
      result_map = []
      for i in test_map[:]:
           temp_hash = ''
           for j in i[2:]:
-               temp_hash += j[:2]
-               temp_hash += j[-2:]
+               temp_hash += j[:num]
+               temp_hash += j[-num:]
           temp_hash = hashlib.sha1(temp_hash.encode('UTF-8')).hexdigest()
           i = list(i)
           i.append(temp_hash)
           result_map.append(i)
      return result_map
 
- dg_hash_key(test_map)
+result_map_01 = dg_hash_key(test_map, 2)
 
-for i in input_map:
+for i in result_map_01:
+     print(i)
 
+'''
 
-
-
-
+s = 'Keep operewards!Keep operewards!Continuelusives!Öffne daewinnen!Продолжа награды¡Sigue alusivos!Keep operewards!Özel etkevam et!Keep operewards!Continua eventi!'
+temp = hashlib.sha1(s.encode("UTF-8")).hexdigest()
+print(temp)
 # resule_list = []
 # for i in test_map:
 #      if "XXX" in i[2]:

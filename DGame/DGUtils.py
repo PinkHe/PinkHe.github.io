@@ -8,11 +8,76 @@ import hashlib
 
 import setfile
 
+def select_fun(connect, sql):
+    cursor = connect.cursor()
+    cursor.execute(sql)
+    result_list = cursor.fetchall()
+    return result_list
+
+
+
+# 向数据库去重插入数据
+def insert_Translate_fun(temp_list,connect, insert_sql, num):
+    cursor = connect.cursor()
+    resource = []
+    temp_list_hash = []
+    for i in temp_list[:]:
+        dg_uuid = str(uuid.uuid4())
+        i.insert(0, dg_uuid)
+        temp = ""
+        temp_hash = ''
+        for j in i[8:-1]:
+            temp_hash += j[:num]
+            temp_hash += j[-num:]
+        temp_list_hash.append(temp_hash)
+        temp_hash = hashlib.sha1(temp_hash.encode()).hexdigest()
+        i.append(temp_hash)
+        temp = tuple(i)#tuple()将列表转换成元组   扩展list()将元组转换成列表
+        resource.append(temp)
+
+    select_all_sign_sql = "SELECT dgTranslateSignCode from dgtranslate "
+    cursor.execute(select_all_sign_sql)
+    all_sign_list = cursor.fetchall()
+
+    #提取出数据库中所有记录的hash值，避免重复插入数据
+    sign_set = set()
+    for i in all_sign_list:
+        sign_set.add(i[0])
+
+
+    #这里使用切片的原因：推测如果遍历的列表和删除数据的列表时同一个的话  在删除数据后数据的位置会发生变化（前移）   从而使得遍历数据发生跳过
+
+    temp_resource = resource[:]
+    for i in resource:
+        if i[-1] in sign_set:
+            temp_resource.remove(i)
+    cursor.executemany(insert_sql,temp_resource)
+    connect.commit()
+    
+
+
+
+#生成翻译特征码
+
+def dg_hash_key(test_map, num):
+     result_map = []
+     for i in test_map[:]:
+          temp_hash = ''
+          for j in i[2:]:
+               temp_hash += j[:num]
+               temp_hash += j[-num:]
+          temp_hash = unicodedata.normalize('NFKC', temp_hash)
+          temp_hash = hashlib.sha1(temp_hash.encode()).hexdigest()
+          i = list(i)
+          i.append(temp_hash)
+          result_map.append(i)
+          
+     return result_map
 
 
 # 向数据库去重插入数据
 
-def insert_fun(temp_list,connect):
+def insert_fun(temp_list,connect, insert_sql):
     cursor = connect.cursor()
     resource = []
     for i in temp_list[:]:
@@ -25,7 +90,7 @@ def insert_fun(temp_list,connect):
         temp = tuple(i)#tuple()将列表转换成元组   扩展list()将元组转换成列表
         resource.append(temp)
 
-    select_all_sign_sql = "SELECT Props_sign from dgprops "
+    select_all_sign_sql = "SELECT dgPropsSignCode from dgProps "
     cursor.execute(select_all_sign_sql)
     all_sign_list = cursor.fetchall()
 
@@ -42,9 +107,7 @@ def insert_fun(temp_list,connect):
         if i[-1] in sign_set:
             temp_resource.remove(i)
     print(temp_resource)
-    insert_sql = "insert into DGProps(Props_id,Props_name,Props_simpleChinese,Props_traditionalChinese,Props_kr,\
-        Props_en,Props_fr,Props_ge,Props_ru,Props_sp,Props_pt,Props_tr,Props_pl,Props_it,Props_sign) \
-        values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    
     cursor.executemany(insert_sql,temp_resource)
     connect.commit()
     
