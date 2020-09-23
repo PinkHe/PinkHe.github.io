@@ -81,6 +81,7 @@ def insert_fun(temp_list,connect, insert_sql):
     cursor = connect.cursor()
     resource = []
     for i in temp_list[:]:
+        i[3],i[9],i[11] = i[4],i[4],i[4]
         dg_uuid = str(uuid.uuid4())
         i.insert(0, dg_uuid)
         temp = ""
