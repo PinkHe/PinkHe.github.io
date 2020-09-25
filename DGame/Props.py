@@ -2,7 +2,7 @@ import DGUtils
 import json
 import uuid
 import hashlib
-
+import xlwt
 
 # 读取道具文件
 Props_excel_path = "./setfile/Props.xls"
@@ -56,9 +56,9 @@ for i in result_list[1:]:
     for j in db_dgtranslate_list:
         if i[-1] == j[-1]:
             result_temp_list.append(j)
-        else:
-            error_dgtranslate_list.append(i)
 
+# true_dgtranslate_list = [x for x in result_temp_list if x in result_list[1:]] #两个列表中的相同元素
+# error_dgtranslate_list = [y for y in (result_temp_list + result_list[1:]) if y not in true_dgtranslate_list] #两个列表中的不同元素
 #包含XXXX的库中的特征码记录
 xxxx_signcode_replace_list = []
 #包含XXXX的库中的记录
@@ -95,19 +95,59 @@ xxxx_replace_list_temp = []
 for i in xxxx_replace_list:
     xxxx_replace_list_temp.append(list(i)) 
 
-
+# 讲包含XXXX的翻译进行替换
 for i in range(0, len(xxxx_replace_list_temp)):
     for j in range(0, len(xxxx_replace_list_temp[i])-10):
         if 'XXXX' in xxxx_replace_list_temp[i][j+8]:
-            xxxx_replace_list_temp[i][j+8].replace('XXXX', replace_props_list[i][j+4])
-            print(""+ xxxx_replace_list_temp[i][j+8])
-
-print("=========================================")
-print(xxxx_replace_list_temp)
+            xxxx_replace_list_temp[i][j+8] = xxxx_replace_list_temp[i][j+8].replace('XXXX', replace_props_list[i][j+4])
+    xxxx_replace_list_temp[i] = tuple(xxxx_replace_list_temp[i])
 
 
-# print(replace_props_list)           
+    
+for i in xxxx_replace_list_temp:
+    for j in range(0, len(result_temp_list)):
+        if i[0] == result_temp_list[j][0]:
+            result_temp_list[j] = i
 
+# 将末尾的特征码替换成换行符，方便在写入文本文件时自动换行
+# for i in range(0, len(result_temp_list)):
+#     result_temp_list[i] = list(result_temp_list[i])
+#     result_temp_list[i][-1] = "\n"
+#     result_temp_list[i] = tuple(result_temp_list[i])
+
+
+
+# with open("result.txt", 'w',encoding="UTF-8") as file:
+#     for i in result_temp_list:
+#         file.writelines(i)
+    
+workbook = xlwt.Workbook(encoding='utf-8')
+booksheet = workbook.add_sheet('Sheet 1', cell_overwrite_ok=True)
+
+header = ["Id","编号","用途","分类","使用时间","开始时间","简中","繁中","韩语","英语","法语","德语","俄语","西班牙语","葡萄牙语","土耳其语","波兰语","意大利语","说明"]
+# 写列头
+row = 0
+for col in range(len(header)):
+    booksheet.write(row, col, header[col])
+
+ # 写内容
+for lines in result_temp_list:
+    row += 1
+    for col in range(len(lines)):
+        booksheet.write(row, col, lines[col])
+if error_dgtranslate_list is not None:
+    row += 1
+    booksheet.write(row, 0, "未定义的条目如下：")
+    for lines in error_dgtranslate_list:
+        row += 1
+        for col in range(len(lines)):
+            booksheet.write(row, col, lines[col])
+
+# 保存文件
+workbook.save("result.xls")
 
         
     
+print("执行完成，执行结果为result.xls")
+    
+print(true_dgtranslate_list)

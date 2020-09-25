@@ -1,5 +1,10 @@
 import hashlib
 
+a = ["1","2","3"]
+
+b = ["2","3"]
+
+print(a-b)
 
 # def dg_hash_key(test_map, num):
 #      result_map = []
