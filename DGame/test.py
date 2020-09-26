@@ -1,10 +1,173 @@
 import hashlib
+import re
+import datetime
 
-a = ["1","2","3"]
+import DGUtils
 
-b = ["2","3"]
 
-print(a-b)
+def start_server_day(day_list, sign_start_time, boolean):
+     if boolean:
+          sign_start_time = datetime.datetime.strptime(sign_start_time, '%Y-%m-%d %H:%M:%S')
+          left_start_time = sign_start_time - datetime.timedelta(days=int(day_list[0])-1)
+          right_start_time = sign_start_time - datetime.timedelta(days=int(day_list[1])-1)
+          # 通过timetuple函数将日期转化成结构体数据类型，然后自己拼接日期格式
+          time = datetime.datetime.timetuple(left_start_time)
+          left_start_time = str(time.tm_year) + ',' + str(time.tm_mon) + ',' + str(time.tm_mday) + ',' + "23,59,59" 
+          time = datetime.datetime.timetuple(right_start_time)
+          right_start_time = str(time.tm_year) + ',' + str(time.tm_mon) + ',' + str(time.tm_mday) + ',' + "0,0,0"
+     else:
+          sign_start_time = datetime.datetime.strptime(sign_start_time, '%Y-%m-%d %H:%M:%S')
+          left_start_time = sign_start_time - datetime.timedelta(days=int(day_list[0])-1)
+          # right_start_time = sign_start_time - datetime.timedelta(days=int(day_list[1])-1)
+          # 通过timetuple函数将日期转化成结构体数据类型，然后自己拼接日期格式
+          time = datetime.datetime.timetuple(left_start_time)
+          left_start_time = str(time.tm_year) + ',' + str(time.tm_mon) + ',' + str(time.tm_mday) + ',' + "23,59,59" 
+          # time = datetime.datetime.timetuple(right_start_time)
+          # right_start_time = str(time.tm_year) + ',' + str(time.tm_mon) + ',' + str(time.tm_mday) + ',' + "0,0,0"
+          right_start_time = "2019,1,1,0,0,0"
+     return right_start_time + "," + left_start_time
+
+
+# 计算文档中的开服天数对应日期
+def fun_start_day():
+     print("请输入活动开始生效的时间 eg:2020-10-09")
+     start_time = input()
+     start_time = start_time + " 00:00:00"
+
+     path = "./eg.xls"
+     list_01 = DGUtils.read_excel(path)
+
+     day_list = [x for x in list_01 if "开服" in str(x)]
+     # for i in list_01:
+     #      if "开服" in str(i):
+     #           print(i)
+
+     day_list_int = []
+
+     for i in day_list:
+          # 正则提取出开服天数段数据
+          day = re.findall(r'开服(.*)天', str(i))
+          # 正则提取出开服天数段数据（纯数字）
+          int_day = re.findall("\d+",str(day))
+          day_list_int.append(int_day)
+
+
+     result_day_text = ""
+
+     for day_list in day_list_int:
+          if len(day_list) < 2:
+               result_day_text += start_server_day(day_list, start_time, False) + "\n"    
+          else:
+               result_day_text += start_server_day(day_list, start_time, True) + "\n"
+               
+
+     with open("./result.txt", "w", encoding="UTF-8") as file:
+          file.write(result_day_text)
+          print("写入结果到result.txt文件完成")
+          print()
+
+# 整理源日期格式
+def fun_zhengli():
+
+     with open("./origin.txt", "r", encoding="UTF-8") as file:
+          list01 = file.readlines()
+
+     temp_str = "" 
+     for i in list01:
+          # # 正则提取出开服天数段数据
+          # day = re.findall(r'开服(.*)天', str(i))
+          # # 正则提取出开服天数段数据（纯数字）
+          # int_day = re.findall("\d+",str(day))
+          # day_list_int.append(int_day)
+          # print(i)
+
+          temp_str += str(i)
+
+     temp_str = temp_str.replace("|","\n")
+
+     with open("./origin_result.txt", "w", encoding="UTF-8") as file:
+          file.write(temp_str)
+     with open("./origin_result.txt", "r", encoding="UTF-8") as file:
+          list01 = file.readlines()
+
+
+     for i in range(0,len(list01)):
+          list01[i] = list01[i][1:-8] + "\n"
+         
+
+     with open("./origin_result.txt", "w", encoding="UTF-8") as file:
+          file.writelines(list01)
+          print("整理结果已写入 origin_result.txt 文档")
+          print()
+
+while True:
+     print("说明：配置文档请写入eg.xls文件")
+     print("说明：计算结果讲写入result.txt文件")
+     print("说明：待整理文件请写入origin.xls文件")
+     print()
+     print("请选择功能：")
+     print("输入  1  ：计算文档 eg.xls 中的开服天数所对应的日期") 
+     print("输入  2  ：整理文档 origin.txt 中的数据格式")
+     print("输入  3  ：退出")
+
+     input_num = input()
+
+     if "1" == input_num:
+          fun_start_day()
+     elif "2" == input_num:
+          fun_zhengli()
+     elif "3" == input_num:
+          break
+     else:
+          print("输入的数据有误")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# a = ["1","2","3"]
+
+# b = ["2","3"]
+
+# print(a-b)
 
 # def dg_hash_key(test_map, num):
 #      result_map = []
@@ -79,9 +242,9 @@ for i in result_map_01:
 
 '''
 
-s = 'Keep operewards!Keep operewards!Continuelusives!Öffne daewinnen!Продолжа награды¡Sigue alusivos!Keep operewards!Özel etkevam et!Keep operewards!Continua eventi!'
-temp = hashlib.sha1(s.encode("UTF-8")).hexdigest()
-print(temp)
+# s = 'Keep operewards!Keep operewards!Continuelusives!Öffne daewinnen!Продолжа награды¡Sigue alusivos!Keep operewards!Özel etkevam et!Keep operewards!Continua eventi!'
+# temp = hashlib.sha1(s.encode("UTF-8")).hexdigest()
+# print(temp)
 # resule_list = []
 # for i in test_map:
 #      if "XXX" in i[2]:
