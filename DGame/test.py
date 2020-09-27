@@ -2,6 +2,7 @@ import hashlib
 import re
 import datetime
 
+
 import DGUtils
 
 
@@ -74,13 +75,6 @@ def fun_zhengli():
 
      temp_str = "" 
      for i in list01:
-          # # 正则提取出开服天数段数据
-          # day = re.findall(r'开服(.*)天', str(i))
-          # # 正则提取出开服天数段数据（纯数字）
-          # int_day = re.findall("\d+",str(day))
-          # day_list_int.append(int_day)
-          # print(i)
-
           temp_str += str(i)
 
      temp_str = temp_str.replace("|","\n")
@@ -92,11 +86,28 @@ def fun_zhengli():
 
 
      for i in range(0,len(list01)):
-          list01[i] = list01[i][1:-8] + "\n"
-         
+          list01[i] = list01[i].split(",")
+          list01[i][0] = list01[i][0].replace("(","")
+          del list01[i][-1]
+
+     result_str_list = []
+
+     for i in list01:
+          str_temp = ""
+          for j in range(0,len(i)):
+               if j == len(i)-1:
+                    str_temp += i[j]
+               else:
+                    str_temp += i[j]
+                    str_temp += ","
+          result_str_list.append(str_temp)
 
      with open("./origin_result.txt", "w", encoding="UTF-8") as file:
-          file.writelines(list01)
+          for i in result_str_list:
+               file.write(str(i))
+               file.write("\n")
+
+          
           print("整理结果已写入 origin_result.txt 文档")
           print()
 
