@@ -150,4 +150,4 @@ workbook.save("result.xls")
     
 print("执行完成，执行结果为result.xls")
     
-print(true_dgtranslate_list)
+# print(true_dgtranslate_list)
