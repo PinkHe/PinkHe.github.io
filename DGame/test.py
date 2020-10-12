@@ -56,10 +56,12 @@ def fun_start_day():
      result_day_text = ""
 
      for day_list in day_list_int:
-          if len(day_list) < 2:
-               result_day_text += start_server_day(day_list, start_time, False) + "\n"    
-          else:
-               result_day_text += start_server_day(day_list, start_time, True) + "\n"
+          
+          if len(day_list) > 0: # 过滤掉部分干扰数据
+               if len(day_list) < 2:
+                    result_day_text += start_server_day(day_list, start_time, False) + "\n"    
+               else:
+                    result_day_text += start_server_day(day_list, start_time, True) + "\n"
                
 
      with open("./result.txt", "w", encoding="UTF-8") as file:
