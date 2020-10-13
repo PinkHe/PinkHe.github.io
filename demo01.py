@@ -1,3 +1,4 @@
+'''
 # 文件读写操作
 
 Demo_file = open("test.text","r")
@@ -14,7 +15,7 @@ Demo_file.close()
 s = 'hahahahh\n'
 print(s.rstrip("\n"))
 
-
+'''
 
 
 '''
@@ -45,13 +46,13 @@ print(getStrFirstAplha(str))
 
 
 
-'''
+
 
 #模块
 import ./../fibo
 
 fibo.fib(10)
-
+'''
 
 
 #相关常用方法

@@ -1,9 +1,16 @@
 import hashlib
 import re
 import datetime
+import sys
 
+sys.path.append("../..")
+sys.path.append("..")
+# print(sys.path)
 
 import DGUtils
+
+
+
 
 
 def start_server_day(day_list, sign_start_time, boolean):
@@ -35,7 +42,7 @@ def fun_start_day():
      start_time = input()
      start_time = start_time + " 00:00:00"
 
-     path = "./eg.xls"
+     path = "./../Demo01File/eg.xls"
      list_01 = DGUtils.read_excel(path)
 
      day_list = [x for x in list_01 if "开服" in str(x)]
@@ -64,7 +71,7 @@ def fun_start_day():
                     result_day_text += start_server_day(day_list, start_time, True) + "\n"
                
 
-     with open("./result.txt", "w", encoding="UTF-8") as file:
+     with open("./../Demo01File/result.txt", "w", encoding="UTF-8") as file:
           file.write(result_day_text)
           print("写入结果到result.txt文件完成")
           print()
@@ -72,7 +79,7 @@ def fun_start_day():
 # 整理源日期格式
 def fun_zhengli():
 
-     with open("./origin.txt", "r", encoding="UTF-8") as file:
+     with open("./../Demo01File/origin.txt", "r", encoding="UTF-8") as file:
           list01 = file.readlines()
 
      temp_str = "" 
@@ -81,9 +88,9 @@ def fun_zhengli():
 
      temp_str = temp_str.replace("|","\n")
 
-     with open("./origin_result.txt", "w", encoding="UTF-8") as file:
+     with open("./../Demo01File/origin_result.txt", "w", encoding="UTF-8") as file:
           file.write(temp_str)
-     with open("./origin_result.txt", "r", encoding="UTF-8") as file:
+     with open("./../Demo01File/origin_result.txt", "r", encoding="UTF-8") as file:
           list01 = file.readlines()
 
 
@@ -104,7 +111,7 @@ def fun_zhengli():
                     str_temp += ","
           result_str_list.append(str_temp)
 
-     with open("./origin_result.txt", "w", encoding="UTF-8") as file:
+     with open("./../Demo01File/origin_result.txt", "w", encoding="UTF-8") as file:
           for i in result_str_list:
                file.write(str(i))
                file.write("\n")
