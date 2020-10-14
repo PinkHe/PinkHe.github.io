@@ -144,10 +144,10 @@ if error_dgtranslate_list is not None:
             booksheet.write(row, col, lines[col])
 
 # 保存文件
-workbook.save("result.xls")
+workbook.save("./setfile/result.xls")
 
         
     
-print("执行完成，执行结果为result.xls")
+print("执行完成，执行结果为setfile/result.xls")
     
 # print(true_dgtranslate_list)
