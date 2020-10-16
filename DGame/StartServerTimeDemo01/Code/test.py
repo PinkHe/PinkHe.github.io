@@ -54,7 +54,10 @@ def fun_start_day():
 
      for i in day_list:
           # 正则提取出开服天数段数据
-          day = re.findall(r'开服(.*)天', str(i))
+          day = re.findall(r'开服[0-9]+天', str(i))
+          if len(day) == 0:
+               day = re.findall(r'开服[0-9]+-[0-9]+天', str(i))
+         
           # 正则提取出开服天数段数据（纯数字）
           int_day = re.findall("\d+",str(day))
           day_list_int.append(int_day)
