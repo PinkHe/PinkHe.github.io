@@ -1,0 +1,12 @@
+python文档:https://docs.python.org/zh-cn/3.8/
+JDK:https://mirrors.huaweicloud.com/java/jdk/
+图灵社区:[图片]https://www.ituring.com.cn/
+Django:https://docs.djangoproject.com/zh-hans/3.0/
+力扣:https://leetcode-cn.com/
+牛客网:https://www.nowcoder.com/
+JSON校验格式化:http://www.bejson.com/index.html
+stackoverflow:https://stackoverflow.com/
+定时器格式转换:http://cron.qqe2.com/
+
+
+
