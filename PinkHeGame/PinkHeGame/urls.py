@@ -16,11 +16,12 @@ Including another URLconf
 
 
 #from django.conf.urls import url
-from django.urls import path
-from . import testhe
- 
+from django.contrib import admin
+from django.urls import include, path
+
 urlpatterns = [
-    path('index/', testhe.index),
+    path('arrangement_time_format/', include('arrangement_time_format.urls')),
+    path('admin/', admin.site.urls),
 ]
 
 # urlpatterns = [
