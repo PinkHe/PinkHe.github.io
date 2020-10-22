@@ -24,6 +24,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
+urlpatterns = [
+    path('to_test/', include('to_test.urls')),
+    path('admin/', admin.site.urls),
+]
+
 # urlpatterns = [
 #     path('hello/', testhe.hello),
 # ]

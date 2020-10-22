@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'to_test.apps.ToTestConfig',
     'arrangement_time_format.apps.ArrangementTimeFormatConfig',
     'django.contrib.admin',
     'django.contrib.auth',
