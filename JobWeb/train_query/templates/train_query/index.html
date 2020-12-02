@@ -1,0 +1,9 @@
+{% if company_list %}
+    <ul>
+    {% for company in company_list %}
+        <li><a href="{% url 'find_company_by_company_id' company.id %}">{{ company.train_company_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No company are available.</p>
+{% endif %}

@@ -13,9 +13,11 @@ class TrainCompany(models.Model):
 
     def __str__(self):
         return self.train_company_name
+        
     
     def to_string(self):
         return self.train_company_name + self.train_company_address_province + train_company_address_city 
+        
 
 
 class WorkPosition(models.Model):

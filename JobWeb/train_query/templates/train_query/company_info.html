@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<head></head>
+<body>
+    <h1>输入的公司为：{{company_info }}</h1>
+    {% if work_position_list %}
+        <ul>
+            {% for position in work_position_list %}
+                <li><a href="{% url 'find_position_by_position_id' position.id %}">{{ position.work_position_name }}</a></li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No position are available.</p>
+    {% endif %}
+    
+
+
+
+</body>
