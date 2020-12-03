@@ -1,4 +1,18 @@
-<h1>
+<!DOCTYPE html>
+<head></head>
+<body>
+    <h1>输入的公司为：{{temp_position.work_position_name }}</h1>
+    <div style="border: 1px ;color: white;">职位名称：{{temp_position.work_position_name}}</div>
+    <div style="border: 1px ;color: white;">职位类型：{{temp_position.work_position_type}}</div>
+    <div style="border: 1px ;color: white;">职位薪资：{{temp_position.work_position_salary}}</div>
+    <form  action="{% url 'train_company:commit_resume' temp_position.id %}" method="POST">
+        {% csrf_token %}
+        <input type="text" id="personal_info_id" name="personal_info_name">
+        <label for="personal_info_id">请输入你的姓名：</label>
+        <input type="submit" name="提交">
+    </form>
+    
 
-    context
-</h1>
+
+
+</body>
