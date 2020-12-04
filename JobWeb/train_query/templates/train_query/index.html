@@ -1,9 +1,44 @@
-{% if company_list %}
-    <ul>
-    {% for company in company_list %}
-        <li><a href="{% url 'train_company:find_company_by_company_id' company.id %}">{{ company.train_company_name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No company are available.</p>
-{% endif %}
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Apache Tomcat Examples</title>
+    </head>
+    <body>
+        <div style="border-style: solid red 1px; ">
+            <h1>
+                培训公司查询
+            </h1>
+
+        </div>
+        <div>
+            <form action="{% url 'train_company:train_company_search'%}" method="POST">
+                {% csrf_token %}
+                <label for="search_type">请选择检索方式：</label>
+                <select id="search_type" name="search_value">
+                    <option value="1">名称</option>
+                    <option value="2">地址</option>
+                </select>
+                <label for="company_search_text_id">请输入搜索的关键字：</label>
+                <input type="text" id="company_search_text_id" name="company_search_text_key"/>
+                <input type="submit" value="检索"/>
+
+            </form>
+           
+        </div>
+        
+        
+        {% if company_list %}
+            <ul>
+            {% for company in company_list %}
+                <li><a href="{% url 'train_company:find_company_by_company_id' company.id %}">{{ company.train_company_name }}</a></li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No company are available.</p>
+        {% endif %}
+    </body>
+</html>
+
+
+
