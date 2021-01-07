@@ -37,22 +37,33 @@ point = {
     "7": "180,100",
     "8": "250,100",
 }
+check_list_str = input("请输入验证码坐标：")
+
+check_list = check_list_str.split(",")
+answer = ''
+for i in check_list:
+    answer += point.get(i)
+    if i != check_list[-1]:
+        answer += ','
 
 callback_check_image_url="https://kyfw.12306.cn/passport/captcha/captcha-check"
 check_image_param = {
     "callback":"jQuery191036962453111752835_1609908697139",
-    "answer":"113%2C51%2C51%2C99",
+    "answer":answer,
     "rand":"sjrand",
     "login_site":"E",
     "_":"1609908697142",
 }
 
-
+callback_check_image_response = session.get(url=callback_check_image_url, params=check_image_param, headers=headers)
+# print(callback_check_image_response.text)
 user_info = {
     "username":"18781224173",
-    "password":"",
+    "password":"08394417959hhj",
     "appid":"otn",
 }
 login_url = "https://kyfw.12306.cn/passport/web/login"
-login_response = session.post(login_url,user_info,headers)
+login_response = session.post(url=login_url, params=user_info, headers=headers)
+login_response = session.get('https://kyfw.12306.cn/otn/view/index.html')
+print(login_response.headers)
 print(login_response.text)
