@@ -2,6 +2,9 @@ import requests
 import re
 import base64
 from PIL import Image
+
+
+# with open("info.json")
 # from os import BytesIO
 session = requests.Session()
 # response = requests.get("https://kyfw.12306.cn/otn/resources/login.html")
@@ -55,15 +58,21 @@ check_image_param = {
     "_":"1609908697142",
 }
 
-callback_check_image_response = session.get(url=callback_check_image_url, params=check_image_param, headers=headers)
-# print(callback_check_image_response.text)
-user_info = {
-    "username":"18781224173",
-    "password":"08394417959hhj",
-    "appid":"otn",
+check_code_response = session.get(url=callback_check_image_url, params=check_image_param, headers=headers)
+slide_check_params = {
+    'appid':'otn',
+    'username':'18781224173',
+    'slideMode':'0'
 }
-login_url = "https://kyfw.12306.cn/passport/web/login"
-login_response = session.post(url=login_url, params=user_info, headers=headers)
-login_response = session.get('https://kyfw.12306.cn/otn/view/index.html')
-print(login_response.headers)
-print(login_response.text)
+slide_response = session.post(url='https://kyfw.12306.cn/passport/web/slide-passcode',data=slide_check_params, verify=False, headers=headers)
+print(slide_response.url)
+# print(callback_check_image_response.text)
+# user_info = {
+#     "password":"",
+#     "appid":"otn",
+# }
+# login_url = "https://kyfw.12306.cn/passport/web/login"
+# login_response = session.post(url=login_url, params=user_info, headers=headers)
+# login_response = session.get('https://kyfw.12306.cn/otn/view/index.html')
+# print(login_response.headers)
+# print(login_response.text)
