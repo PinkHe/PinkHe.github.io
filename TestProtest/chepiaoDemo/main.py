@@ -59,6 +59,7 @@ check_image_param = {
 }
 
 check_code_response = session.get(url=callback_check_image_url, params=check_image_param, headers=headers)
+print(check_code_response.text)
 slide_check_params = {
     'appid':'otn',
     'username':'18781224173',
@@ -68,7 +69,7 @@ slide_response = session.post(url='https://kyfw.12306.cn/passport/web/slide-pass
 print(slide_response.url)
 # print(callback_check_image_response.text)
 # user_info = {
-#     "password":"",
+#     "password":"08394417959hhj",
 #     "appid":"otn",
 # }
 # login_url = "https://kyfw.12306.cn/passport/web/login"
