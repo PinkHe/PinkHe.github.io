@@ -4,17 +4,6 @@ import uuid
 import hashlib
 import xlwt
 
-# 读取道具文件
-Props_excel_path = "./setfile/Props.xls"
-props_list = DGUtils.read_excel(Props_excel_path)
-
-# 读取道具文件
-bannerTranslate_excel_path = "./setfile/bannerTranslate.xls"
-bannerTranslate_list = DGUtils.read_excel(bannerTranslate_excel_path)
-
-# 读取待验证的源文件
-TranslateOrigin_excel_path = "./setfile/TranslateOrigin.xls"
-TranslateOrigin_list = DGUtils.read_excel(TranslateOrigin_excel_path)
 
 
 #读取数据库配置文件
@@ -22,21 +11,41 @@ with open("./setfile/set.json", "r", encoding="UTF-8") as DGsetJson:
     DGset = json.load(DGsetJson)
 connect = DGUtils.connect_mysql(DGset)
 
-# 调用函数，向道具表插入数据
-insert_props_sql = "insert into DGProps(dgPropsId,dgPropsName,dgPropsSimpleChinese,dgPropsTraditionalChinese,dgPropsKr,\
+# 读取待验证的源文件
+    TranslateOrigin_excel_path = "./setfile/TranslateOrigin.xls"
+    TranslateOrigin_list = DGUtils.read_excel(TranslateOrigin_excel_path)
+
+
+#数据库去重插入道具信息
+def insert_props():
+    # 读取道具文件
+    Props_excel_path = "./setfile/Props.xls"
+    props_list = DGUtils.read_excel(Props_excel_path)
+
+    # 调用函数，向道具表插入数据
+    insert_props_sql = "insert into DGProps(dgPropsId,dgPropsName,dgPropsSimpleChinese,dgPropsTraditionalChinese,dgPropsKr,\
         dgPropsEn,dgPropsFr,dgPropsGe,dgPropsRu,dgPropsSp,dgPropsPt,dgPropsTr,dgPropsPl,dgPropsIt,dgPropsSignCode) \
         values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    DGUtils.insert_fun(props_list, connect, insert_props_sql)
 
-# DGUtils.insert_fun(props_list, connect, insert_props_sql)
+
+#数据库去重插入翻译模板信息
+def insert_Translate():
+    # 读取翻译文件
+    bannerTranslate_excel_path = "./setfile/bannerTranslate.xls"
+    bannerTranslate_list = DGUtils.read_excel(bannerTranslate_excel_path)
+
+    # 调用函数，向翻译表插入数据
+    insert_Translate_sql = "insert into dgtranslate(dgTranslateId, dgTranslateNum, dgTranslateUsePlace, dgTranslateCategory, dgTranslateUseTime, dgTranslateStartTime,\
+            dgTranslateSimpleChinese, dgTranslateTraditionalChinese, dgTranslateKr, dgTranslateEn, dgTranslateFr, dgTranslateGe, dgTranslateRu,\
+            dgTranslateSp, dgTranslatePt, dgTranslateTr, dgTranslatePl, dgTranslateIt, dgTranslateInfo, dgTranslateSignCode)\
+            values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+
+    DGUtils.insert_Translate_fun(bannerTranslate_list[:], connect, insert_Translate_sql, 8)
 
 
-# 调用函数，向翻译表插入数据
-insert_Translate_sql = "insert into dgtranslate(dgTranslateId, dgTranslateNum, dgTranslateUsePlace, dgTranslateCategory, dgTranslateUseTime, dgTranslateStartTime,\
-        dgTranslateSimpleChinese, dgTranslateTraditionalChinese, dgTranslateKr, dgTranslateEn, dgTranslateFr, dgTranslateGe, dgTranslateRu,\
-        dgTranslateSp, dgTranslatePt, dgTranslateTr, dgTranslatePl, dgTranslateIt, dgTranslateInfo, dgTranslateSignCode)\
-        values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
-# DGUtils.insert_Translate_fun(bannerTranslate_list[:], connect, insert_Translate_sql, 8)
+
 
 
 result_list = DGUtils.dg_hash_key(TranslateOrigin_list, 8)
